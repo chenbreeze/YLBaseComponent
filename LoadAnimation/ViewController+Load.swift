@@ -33,13 +33,17 @@ fileprivate struct AssociatedKeys{
 }
 
 
-/// 刷新视图协议
-public protocol RefreshView: class{
-     func refreshView()
+
+
+
+/// 请求数据 with 页面动画
+public protocol RequestWithPageAnimation : class{
+    func requestData()
+    func requestFailedView(error: Error) -> ReRequestableView
 }
 
 
-public extension RefreshView where Self: UIViewController{
+public extension RequestWithPageAnimation where Self: UIViewController{
     
     internal var socketLoadingView: SocketLoadingView? {
         set {
@@ -176,7 +180,7 @@ public extension RefreshView where Self: UIViewController{
             }else{
                 noNetworkView = NoNetworkView()
                 noNetworkView?.refreshClosure = {
-                    self.refreshView()
+                    self.requestData()
                 }
                 self.view.addSubview(noNetworkView!)
                 
@@ -197,7 +201,7 @@ public extension RefreshView where Self: UIViewController{
             }else{
                 serverCrashView = ServerCrashView()
                 serverCrashView?.refreshClosure = {
-                    self.refreshView()
+                    self.requestData()
                 }
                 self.view.addSubview(serverCrashView!)
                 
@@ -226,8 +230,9 @@ public extension UIViewController{
             return obj
         }
     }
-    
+        
     public func showHudLoadingView() -> Void{
+        
         if let view = circleLoadingView{
             view.isHidden = false
             self.view.bringSubview(toFront: view)

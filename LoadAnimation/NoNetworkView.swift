@@ -40,7 +40,7 @@ public class NoNetworkView : UIView{
     }
     
     
-    @objc var refreshClosure : SCVRefreshClosure?
+    var refreshClosure : SCVRefreshClosure?
     
     init(){
         super.init(frame: CGRect.zero)

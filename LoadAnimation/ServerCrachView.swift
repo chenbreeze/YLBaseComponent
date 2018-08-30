@@ -28,7 +28,7 @@ public class ServerCrashView : UIControl{
     }
     
 
-    @objc var refreshClosure : SCVRefreshClosure?
+    var refreshClosure : SCVRefreshClosure?
     
     init(){
         super.init(frame: CGRect.zero)
