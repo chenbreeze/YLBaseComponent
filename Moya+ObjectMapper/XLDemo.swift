@@ -46,6 +46,11 @@ class XLTest {
     let provider = XLProvider<XLTestApi>()
     
     func requestUser(){
+        
+        // 调用
+        let provider = XLProvider<XLTestApi>()
+        let userSequence = provider.rx.requestResult(.user) as Observable<XLRequestResult<XLTestModel>>
+        
         // 1
         provider.rx.requestModel(.home).subscribe(onSuccess: { (model:XLTestModel, isCache:Bool) in
         
@@ -55,7 +60,7 @@ class XLTest {
             }.disposed(by: disposeBag)
         
         // 2
-        let userSequence = provider.rx.requestResult(.user) as Observable<XLRequestResult<XLTestModel>>
+        
         
         // 3
         provider.rx.requestResult(.user).subscribe(onNext: { (result:Result<XLTestModel, AnyError> , isCache:Bool) in

@@ -26,6 +26,7 @@ public protocol DataProviderType: AnyObject {
 
 final class DataProvider<Target: YLTargetType>: DataProviderType{
     
+
     /// 修改这个变量添加默认plugin
     private var defaultPlugins: [PluginType] = [
         NetworkLoggerPlugin(verbose: false),
@@ -112,9 +113,8 @@ final class DataProvider<Target: YLTargetType>: DataProviderType{
     private func handle(response: Response, isCache: Bool, completion: @escaping Completion){
         
         do {
-            if let model = try response.mapCommonModel(type: Target.responseModelType.self){
+            if let model = try response.mapCommonModel() as Target.responseModelType? {
                 completion( RequestResult.init(value: model), isCache)
-                
                 
             }else{
                 completion( RequestResult.init(error: AnyError(YLError.mapNilError)), isCache )

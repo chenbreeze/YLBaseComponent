@@ -11,6 +11,7 @@ import RxSwift
 import Moya
 import ObjectMapper
 import NSObject_Rx
+import Result
 
 enum YLTestApi {
    case home
@@ -42,10 +43,27 @@ extension YLTestApi: YLTargetType{
     
 }
 
+class MoyaTest  {
+    
+    func test() {
+        let provider = MoyaProvider<YLTestApi>().rx
+        
+        let sequence1 = provider.request(.home).mapCommonModelResult() as Observable<ResponseCommonObjectResult<YLTestModel>>
+        
+        let single = provider.request(.home).mapCommonObjectData() as Single<YLTestModel>
+        
+    }
+
+}
+
 class YLTest {
-    let provider = DataProvider<YLTestApi>()
     
     func requestUser(){
+        
+        let provider = DataProvider<YLTestApi>().
+        let sequence1 = provider.rx.requestModel(.home)
+        let sequence2 = provider.rx.requestResult(.home)
+        
         provider.rx.requestModel(.home).subscribe(onSuccess: { (response) in
             
             let data = response.model

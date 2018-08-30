@@ -112,10 +112,11 @@ final class XLProvider<Target: XLTargetType>: XLProviderType{
     private func handle<ModelType: Mappable>(response: Response, isCache: Bool, completion: @escaping (_ result: Result<ModelType, AnyError>, _ isCache: Bool) -> Void) {
         
         do {
-            if let model = try response.mapCommonModel(type: ModelType.self){
+            
+            if let model = try response.mapCommonModel() as ModelType? {
+
                 completion( Result<ModelType, AnyError>.init(value: model), isCache)
-                
-                
+
             }else{
                 completion( Result<ModelType, AnyError>.init(error: AnyError(YLError.mapNilError)), isCache )
             }
