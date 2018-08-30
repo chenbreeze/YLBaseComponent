@@ -113,12 +113,8 @@ final class DataProvider<Target: YLTargetType>: DataProviderType{
     private func handle(response: Response, isCache: Bool, completion: @escaping Completion){
         
         do {
-            if let model = try response.mapCommonModel() as Target.responseModelType? {
-                completion( RequestResult.init(value: model), isCache)
-                
-            }else{
-                completion( RequestResult.init(error: AnyError(YLError.mapNilError)), isCache )
-            }
+            let model = try response.mapCommonModel() as Target.responseModelType
+            completion( RequestResult.init(value: model), isCache)
             
         }catch{
             completion( RequestResult.init(error: AnyError(error) ), isCache)

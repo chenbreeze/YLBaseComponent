@@ -113,14 +113,10 @@ final class XLProvider<Target: XLTargetType>: XLProviderType{
         
         do {
             
-            if let model = try response.mapCommonModel() as ModelType? {
+            let model = try response.mapCommonModel() as ModelType
 
-                completion( Result<ModelType, AnyError>.init(value: model), isCache)
+            completion( Result<ModelType, AnyError>.init(value: model), isCache)
 
-            }else{
-                completion( Result<ModelType, AnyError>.init(error: AnyError(YLError.mapNilError)), isCache )
-            }
-            
         }catch{
             completion( Result<ModelType, AnyError>.init(error: AnyError(error) ), isCache)
         }

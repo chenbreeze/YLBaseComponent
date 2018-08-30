@@ -60,7 +60,7 @@ class YLTest {
     
     func requestUser(){
         
-        let provider = DataProvider<YLTestApi>().
+        let provider = DataProvider<YLTestApi>()
         let sequence1 = provider.rx.requestModel(.home)
         let sequence2 = provider.rx.requestResult(.home)
         
