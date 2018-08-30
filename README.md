@@ -11,7 +11,7 @@
        let single = provider.request(.home).mapCommonObjectData() as Single<YLTestModel>
       
      ```
-   + 扩展TargetType协议，封装MoyaProvider 1
+   + 扩展TargetType协议，封装MoyaProvider 1  YLTargetType+DataProvider
    
      ```
       // 调用
@@ -19,7 +19,7 @@
         let sequence1 = provider.rx.requestModel(.home)
         let sequence2 = provider.rx.requestResult(.home)
      ```
-    + 扩展TargetType协议，封装MoyaProvider 2
+    + 扩展TargetType协议，封装MoyaProvider 2 XLTargetType+XLProvider
     
       ```
        // 调用
