@@ -26,3 +26,37 @@
         let provider = XLProvider<XLTestApi>()
         let userSequence = provider.rx.requestResult(.user) as Observable<XLRequestResult<XLTestModel>>
       ```
+ * 请求数据 加载动画库， 核心协议
+   ```
+    /// 请求数据 with 页面动画
+    public protocol PageRequestable: class{
+
+        func requestData() 
+
+        func pageLoadingView() -> UIView
+        func layoutLoadingView(_ view: UIView)
+
+        func requestFailedView(error: Error) -> ReRequestableView
+        func layoutFailedView(_ view: ReRequestableView)
+    }
+
+    /// 请求数据 with hud动画, eg: 菊花样式
+    public protocol HudRequestable: class{
+        func hudLoadingView() -> UIView
+        func layoutHudLoadingView(_ view: UIView)
+    }
+   ```
+   
+   ```
+    public typealias ReRequestableView = ReRequestable & Viewable
+
+    public protocol ReRequestable: class {
+        var request: () -> Void { set get }
+    }
+
+    public protocol Viewable{
+        var realView: UIView { get }
+    }
+
+   ```
+   
