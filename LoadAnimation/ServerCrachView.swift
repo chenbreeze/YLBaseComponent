@@ -10,11 +10,20 @@ import Foundation
 import UIKit
 import Then
 
-public typealias SCVRefreshClosure = () -> Void
 
 
 /// 不要直接使用此类 配合ViewController + Load 使用
-public class ServerCrashView : UIControl{
+public class ServerCrashView : UIControl, ReRequestable{
+    
+    public var request: () -> Void{
+        set{
+            tapEvent = newValue
+        }
+        
+        get{
+            return tapEvent!
+        }
+    }
     
     let imageView = UIImageView().then {
         $0.image = UIImage(named: "serverCrach")
@@ -28,7 +37,7 @@ public class ServerCrashView : UIControl{
     }
     
 
-    var refreshClosure : SCVRefreshClosure?
+    var tapEvent : (() -> Void)?
     
     init(){
         super.init(frame: CGRect.zero)
@@ -50,7 +59,7 @@ public class ServerCrashView : UIControl{
     }
     
     @objc private func tappedInView() -> Void{
-        if let closure = refreshClosure{
+        if let closure = tapEvent{
             closure()
         }
     }

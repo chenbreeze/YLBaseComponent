@@ -10,20 +10,14 @@ import Foundation
 import UIKit
 
 
-public typealias ReRequestableView = ReRequestable & UIViewable
+public typealias ReRequestableView = ReRequestable & Viewable
 
-public protocol ReRequestable {
-    typealias ReRequestFunctionType = () -> Void
-    var request: ReRequestFunctionType { get set }
+public protocol ReRequestable: class {
+    var request: () -> Void { set get }
 }
 
-public protocol UIViewable{
-    var view: UIView { get }
+public protocol Viewable{
+    var realView: UIView { get }
 }
 
 
-extension UIView: UIViewable{
-    public var view: UIView {
-        return self
-    }
-}

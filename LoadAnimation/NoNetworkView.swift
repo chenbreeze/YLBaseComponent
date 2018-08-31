@@ -12,11 +12,18 @@ import Then
 import SnapKit
 
 
-public typealias NNVRefreshClosure = () -> Void
-
-
-/// 不要直接使用此类 配合ViewController + Load 使用
-public class NoNetworkView : UIView{
+public class NoNetworkView : UIView, ReRequestable{
+ 
+    public var request: () -> Void{
+        set{
+            tapEvent = newValue
+        }
+        
+        get{
+            return tapEvent!
+        }
+    }
+    
     
     let imageView = UIImageView().then {        
         $0.image = UIImage(named: "noNetwork")
@@ -40,7 +47,7 @@ public class NoNetworkView : UIView{
     }
     
     
-    var refreshClosure : SCVRefreshClosure?
+    var tapEvent : (() -> Void)?
     
     init(){
         super.init(frame: CGRect.zero)
@@ -68,7 +75,7 @@ public class NoNetworkView : UIView{
     }
     
     @objc private func tappedInView() -> Void{
-        if let closure = refreshClosure{
+        if let closure = tapEvent{
             closure()
         }
     }

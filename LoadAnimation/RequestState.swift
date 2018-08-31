@@ -13,7 +13,7 @@ public enum RequestState {
     case idle
     case loading
     case success(String?)
-    case failure(Error?, String?)
+    case failure(Error, String?)
     
     var isSuccess: Bool {
         switch self {
