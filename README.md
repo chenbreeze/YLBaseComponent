@@ -1,6 +1,6 @@
 # Swift 基础可复用类库
 
- * 网络库  封装Moya+ObjectMapper 及扩展
+ *  **网络库  封装Moya+ObjectMapper 及扩展**
  
    + 扩展Moya.Response，通过泛型和ObjectMapper增数加据映射功能, 并扩展相应Rx
    
@@ -26,7 +26,7 @@
         let provider = XLProvider<XLTestApi>()
         let userSequence = provider.rx.requestResult(.user) as Observable<XLRequestResult<XLTestModel>>
       ```
- * 请求数据 加载动画库， 核心协议
+ *  **请求数据 加载动画库， 核心协议**
    ```
     /// 请求数据 with 页面动画
     public protocol PageRequestable: class{
