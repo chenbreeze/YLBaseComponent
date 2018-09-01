@@ -12,6 +12,8 @@ import UIKit
 
 public typealias ReRequestableView = ReRequestable & Viewable
 
+public typealias ReRequestableView1 = UIView & ReRequestable
+
 public protocol ReRequestable: class {
     var request: () -> Void { set get }
 }

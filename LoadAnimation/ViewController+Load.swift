@@ -45,7 +45,7 @@ public extension PageRequestable where Self: UIViewController{
     }
     
     
-    var SocketLoadingBinder: Binder<RequestState>{
+    var LoadingBinder: Binder<RequestState>{
         set{
             objc_setAssociatedObject(self, &PageAssociatedKeys.Binder, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
