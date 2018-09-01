@@ -59,4 +59,20 @@
     }
 
    ```
+ * **上拉加载 下拉刷新 自动创建框架**
    
+   思路： 通过指定下拉加载和上拉刷新的hanlder，可自动创建对应的 header&footer, 可根据style批量定制 [Demo](https://github.com/chenbreeze/YLBaseComponent/blob/master/Refreshable/RefreshProtocolDemo.swift)
+   ```
+   protocol Scrollable {
+      var scrollView: UIScrollView  { get }
+   }
+
+   protocol Refreshable:class, Scrollable {
+
+      typealias RefreshHanlder = () -> Void
+
+      func mjRefreshHeader(hanlder: @escaping RefreshHanlder) -> MJRefreshHeader
+      func mjRefreshFooter(hanlder: @escaping RefreshHanlder) -> MJRefreshFooter
+
+    }
+   ```
